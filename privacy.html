@@ -20,122 +20,339 @@
 
 <h1>Privacy Policy</h1>
 
-<p>Last updated: 2026</p>
+<p>Last updated: May 23, 2026</p>
 
 <p>
-Granosi respects your privacy and is committed to protecting
-your personal information. This Privacy Policy explains how information
-is collected and used when you use the application.
+Granosi respects your privacy. This Privacy Policy explains what information we
+collect, how we use it, and what choices you have when you use the Granosi mobile
+application and related online services.
 </p>
 
-<h2>Information We Collect</h2>
-
-<h3>Account Information</h3>
+<h2>Data Controller</h2>
 
 <p>
-If you sign in using authentication providers such as Google,
-we may receive basic account information including:
+Granosi is the data controller for personal information processed through the
+Granosi app and backend services. For privacy questions or requests, contact:
+<a href="mailto:translation.daybook@gmail.com">translation.daybook@gmail.com</a>
+</p>
+
+<h2>Summary: What We Store and Where</h2>
+
+<p>
+Granosi is designed so your diary content stays primarily on your device. Here
+is a quick overview:
 </p>
 
 <ul>
-<li>User identifier</li>
-<li>Email address</li>
-<li>Profile name</li>
+<li><strong>On your device:</strong> diary entries, local chat history, app settings, and backup encryption keys (in secure storage)</li>
+<li><strong>On Granosi servers (Firebase):</strong> account profile, language preferences, token balance, subscription status, AI learning memory, and ad reward records</li>
+<li><strong>In your cloud account (optional):</strong> encrypted backup files on Google Drive (Android) or iCloud (iOS) — only if you enable backup</li>
+<li><strong>Sent to AI providers for processing:</strong> text you submit for translation, chat, or practice feedback — processed to generate responses; not stored by Granosi as a full diary archive</li>
 </ul>
 
-<h3>User Content</h3>
+<h2>Information We Collect</h2>
+
+<h3>Account and Authentication Data</h3>
 
 <p>
-The application processes text submitted by users for translation
-and language learning purposes.
+When you sign in, we receive information from your authentication provider:
 </p>
 
+<ul>
+<li><strong>Google (Android):</strong> user identifier, email address, and profile name (as permitted by your account)</li>
+<li><strong>Apple (iOS):</strong> user identifier and email (which may be Apple's private relay address); name on first sign-in if you choose to share it</li>
+</ul>
+
 <p>
-This content may be analyzed by artificial intelligence services
-to generate translations and feedback.
+We use Firebase Authentication to manage your account. Your Firebase user ID (UID)
+links your profile across devices.
+</p>
+
+<h3>Language Profile and Account Settings</h3>
+
+<p>
+We store your native language, target language, and related account fields in
+Firestore, including:
+</p>
+
+<ul>
+<li>AI token balance and daily refresh timestamps</li>
+<li>Granosi Plus subscription status and expiration (<code>plus_until</code>)</li>
+<li>Daily ad unlock date (for free-tier users)</li>
+<li>Backup encryption key material (<code>backup_v3_key_material</code>) to help restore encrypted backups across devices — this is not your diary content in readable form</li>
+</ul>
+
+<h3>User Content Submitted to AI Features</h3>
+
+<p>
+When you use AI-powered features, we process the text you submit, such as:
+</p>
+
+<ul>
+<li>Source text and translations for practice and feedback</li>
+<li>Chat messages in conversation practice</li>
+<li>Context from recent messages in a conversation</li>
+</ul>
+
+<p>
+This content is sent to our backend (Firebase Cloud Functions) and forwarded to
+third-party AI providers to generate responses. Message length limits apply
+(for example, translation text up to approximately 500 characters and chat
+messages up to approximately 250 characters).
+</p>
+
+<h3>AI-Derived Learning Memory</h3>
+
+<p>
+To personalize chat and practice over time, Granosi may extract and store
+learning memory on our servers, including:
+</p>
+
+<ul>
+<li>Short text fragments from your conversations</li>
+<li>Vector embeddings derived from those fragments (via Google Vertex AI)</li>
+<li>Difficulty patterns identified during practice</li>
+</ul>
+
+<p>
+Memory is stored in Firestore collections (<code>chat_memory_chunks</code> and
+<code>learning_difficulty_chunks</code>). Limits apply (for example, up to 200 chat
+memory chunks and 100 difficulty chunks per user). Older entries may be removed
+when limits are reached.
+</p>
+
+<h3>Subscription and Purchase Data</h3>
+
+<p>
+If you subscribe to Granosi Plus on Android, we process:
+</p>
+
+<ul>
+<li>Product identifier (<code>granosi_plus_monthly</code>)</li>
+<li>Google Play purchase token and verification status</li>
+<li>Subscription expiration date</li>
+</ul>
+
+<p>
+Payment card details are handled by Google Play; Granosi does not receive or
+store your full payment information.
+</p>
+
+<h3>Advertising and Token Rewards</h3>
+
+<p>
+Free-tier users may watch rewarded video ads (Google AdMob) to unlock daily AI
+practice or earn additional tokens. We process:
+</p>
+
+<ul>
+<li>Ad reward session identifiers and status</li>
+<li>Server-side verification data from AdMob</li>
+<li>Token credit records linked to your account</li>
+</ul>
+
+<h3>Cloud Backup (Optional)</h3>
+
+<p>
+If you enable cloud backup, Granosi creates an encrypted backup of your local
+progress and stores it in your Google Drive (Android) or iCloud (iOS) account.
+The backup may include diary entries, entry conversations, and chat practice
+history. Backups are encrypted with AES-256-GCM before upload. Granosi cannot
+read your decrypted backup content from your cloud storage.
 </p>
 
 <h3>Technical Information</h3>
 
 <p>
-We may collect limited technical information such as:
+We may process limited technical information needed to operate the service,
+such as:
 </p>
 
 <ul>
-<li>Device type</li>
-<li>Operating system</li>
-<li>Application version</li>
-<li>Error logs</li>
+<li>Device type and operating system</li>
+<li>App version</li>
+<li>Platform (Android or iOS)</li>
+<li>Server and error logs related to API requests</li>
 </ul>
 
 <p>
-This information is used only to maintain and improve the application.
+Granosi does not currently integrate Firebase Analytics or Crashlytics in the
+client application.
 </p>
+
+<h2>Information We Do Not Collect</h2>
+
+<ul>
+<li>We do not automatically upload your full diary to our servers</li>
+<li>We do not sell or rent your personal information</li>
+<li>We do not use Firebase Analytics for marketing tracking in the app</li>
+<li>We do not require unnecessary sensitive data (such as government IDs or payment card numbers — payments are handled by Google Play)</li>
+</ul>
 
 <h2>How We Use Information</h2>
 
-<p>Collected information may be used to:</p>
+<p>
+We use collected information to:
+</p>
 
 <ul>
-<li>Provide translation and language learning features</li>
-<li>Improve application functionality</li>
-<li>Maintain security and prevent abuse</li>
+<li>Provide translation, grammar, chat, and practice features</li>
+<li>Authenticate your account and sync your profile</li>
+<li>Manage AI token balances, subscriptions, and ad rewards</li>
+<li>Personalize learning through AI memory</li>
+<li>Enable optional encrypted cloud backup</li>
+<li>Maintain security, prevent abuse, and troubleshoot errors</li>
+<li>Comply with legal obligations</li>
 </ul>
 
-<h2>Third-Party Services</h2>
+<h2>Legal Bases (where applicable)</h2>
 
-<p>The app may use third-party services including:</p>
+<p>
+Depending on your location, we process personal data based on:
+</p>
 
 <ul>
-<li>Firebase services (authentication, analytics, notifications)</li>
-<li>Cloud hosting infrastructure</li>
-<li>Artificial intelligence APIs for translation processing</li>
+<li><strong>Performance of a contract:</strong> to provide the service you request</li>
+<li><strong>Legitimate interests:</strong> to secure the service, prevent fraud, and improve features</li>
+<li><strong>Consent:</strong> where required for optional features such as cloud backup or personalized advertising through rewarded ads</li>
+<li><strong>Legal obligation:</strong> where we must comply with applicable law</li>
+</ul>
+
+<h2>AI Processing and Third-Party Providers</h2>
+
+<p>
+Granosi relies on third-party services that may process data according to their
+own policies:
+</p>
+
+<ul>
+<li><strong>Firebase</strong> (Google) — Authentication, Firestore database, Cloud Functions</li>
+<li><strong>Groq</strong> — large language model inference for translations, chat, and feedback</li>
+<li><strong>Google Vertex AI</strong> — text embeddings for learning memory</li>
+<li><strong>Google AdMob</strong> — rewarded video advertisements</li>
+<li><strong>Google Play Billing</strong> — subscription purchases (Android)</li>
+<li><strong>Google Drive / Apple iCloud</strong> — optional user-initiated encrypted backups</li>
 </ul>
 
 <p>
-These services may process information according to their own policies.
+User content submitted to AI features is transmitted to these providers for
+processing. We recommend reviewing their privacy policies for additional details.
 </p>
 
 <h2>Data Sharing</h2>
 
 <p>
-We do not sell or rent personal information.
+We do not sell your personal information. We share data only:
 </p>
 
+<ul>
+<li>With service providers necessary to operate Granosi (listed above)</li>
+<li>When required by law, regulation, or valid legal process</li>
+<li>To protect the rights, safety, and security of Granosi, users, or others</li>
+</ul>
+
+<h2>International Data Transfers</h2>
+
 <p>
-Information may only be shared with service providers necessary to
-operate the application or when required by law.
+Granosi backend services run on Google Cloud (for example, Cloud Functions in
+<code>southamerica-east1</code>). AI embedding services may run in other regions
+(for example, <code>us-central1</code>). Data may be transferred to and processed
+in countries other than your own. Where required, we rely on appropriate
+safeguards such as standard contractual clauses or equivalent mechanisms.
+</p>
+
+<h2>Data Retention</h2>
+
+<p>
+We retain information for as long as needed to provide the service:
+</p>
+
+<ul>
+<li><strong>Account and profile data:</strong> while your account is active</li>
+<li><strong>AI learning memory:</strong> until you delete your account or until storage limits cause older chunks to be removed</li>
+<li><strong>Subscription and ad transaction records:</strong> for operational, fraud prevention, and legal purposes</li>
+<li><strong>Local diary data:</strong> on your device until you delete it, uninstall the app, or clear app data</li>
+<li><strong>Cloud backups:</strong> in your Drive or iCloud account until you delete them</li>
+</ul>
+
+<p>
+You may request deletion of your account and associated server-side data by
+contacting us (see Your Choices and Rights below).
 </p>
 
 <h2>Data Security</h2>
 
 <p>
-Reasonable security measures are implemented to protect user data.
-However, no internet service can guarantee absolute security.
+We implement reasonable technical and organizational measures to protect your
+information, including encrypted cloud backups (AES-256-GCM with PBKDF2 key
+derivation) and authenticated API access. However, no method of transmission or
+storage over the internet is completely secure, and we cannot guarantee absolute
+security.
 </p>
 
-<h2>User Rights</h2>
+<h2>Your Choices and Rights</h2>
 
 <p>
-Users may request deletion of their account and associated data
-by contacting us.
+Depending on your location, you may have the right to:
+</p>
+
+<ul>
+<li>Access the personal data we hold about you</li>
+<li>Correct inaccurate profile information</li>
+<li>Request deletion of your account and associated server-side data</li>
+<li>Object to or restrict certain processing</li>
+<li>Data portability, where applicable</li>
+<li>Withdraw consent for optional processing (such as cloud backup)</li>
+<li>Lodge a complaint with a supervisory authority (for example, under GDPR or LGPD)</li>
+</ul>
+
+<p>
+To exercise these rights, email
+<a href="mailto:translation.daybook@gmail.com">translation.daybook@gmail.com</a>.
+We may need to verify your identity before processing requests.
+</p>
+
+<p>
+You can also:
+</p>
+
+<ul>
+<li>Disable cloud backup in app settings</li>
+<li>Manage or cancel Granosi Plus through Google Play (Android)</li>
+<li>Delete local data by clearing app data or uninstalling Granosi</li>
+<li>Delete encrypted backup files from your Google Drive or iCloud account</li>
+</ul>
+
+<h2>Children's Privacy</h2>
+
+<p>
+Granosi is not directed to children under 13 years of age (or the minimum age
+required in your jurisdiction). We do not knowingly collect personal information
+from children below the applicable age. If you believe a child has provided us
+personal information, please contact us so we can take appropriate action.
 </p>
 
 <h2>Changes to This Policy</h2>
 
 <p>
-This Privacy Policy may be updated periodically. Updates will be
-reflected by modifying the "Last updated" date.
+We may update this Privacy Policy from time to time. The "Last updated" date at
+the top reflects the latest revision. Material changes may be communicated through
+the app or this website. Continued use of Granosi after changes take effect
+constitutes acceptance of the updated policy.
 </p>
 
 <h2>Contact</h2>
 
 <p>
-If you have questions regarding this policy, contact:
+Privacy questions and data requests:
+<a href="mailto:translation.daybook@gmail.com">translation.daybook@gmail.com</a>
 </p>
 
+<h2>Relationship to Terms of Service</h2>
+
 <p>
-Email: translation.daybook@gmail.com
+Your use of Granosi is also governed by our
+<a href="terms.html">Terms of Service</a>.
 </p>
 
 </div>
