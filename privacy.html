@@ -29,7 +29,7 @@
 <section class="doc-hero">
 <div class="container">
 <h1>Privacy Policy</h1>
-<p class="doc-meta">Last updated: <time datetime="2026-05-23">May 23, 2026</time></p>
+<p class="doc-meta">Last updated: <time datetime="2026-05-29">May 29, 2026</time></p>
 </div>
 </section>
 
@@ -64,7 +64,7 @@ is a quick overview:
 
 <ul>
 <li><strong>On your device:</strong> diary entries, local chat history, app settings, and backup encryption keys (in secure storage)</li>
-<li><strong>On Granosi servers (Firebase):</strong> account profile, language preferences, token balance, subscription status, AI learning memory, and ad reward records</li>
+<li><strong>On Granosi servers (Firebase):</strong> account profile, language preferences, token balance, subscription status, encrypted AI learning memory, and ad reward records</li>
 <li><strong>In your cloud account (optional):</strong> encrypted backup files on Google Drive (Android) or iCloud (iOS) — only if you enable backup</li>
 <li><strong>Sent to AI providers for processing:</strong> text you submit for translation, chat, or practice feedback — processed to generate responses; not stored by Granosi as a full diary archive</li>
 </ul>
@@ -138,6 +138,26 @@ Memory is stored in Firestore collections (<code>chat_memory_chunks</code> and
 <code>learning_difficulty_chunks</code>). Limits apply (for example, up to 200 chat
 memory chunks and 100 difficulty chunks per user). Older entries may be removed
 when limits are reached.
+</p>
+
+<h3>How Learning Memory Is Protected</h3>
+
+<p>
+We apply additional safeguards to learning memory stored on our servers:
+</p>
+
+<ul>
+<li><strong>Encrypted text fields:</strong> conversation fragments, difficulty descriptions, and related text fields are encrypted with <strong>AES-256-GCM</strong> before they are written to Firestore. They are not stored as readable plain text in the database.</li>
+<li><strong>Server-side keys only:</strong> decryption keys are derived on our backend per account. The mobile app does not receive the master key used to protect learning memory.</li>
+<li><strong>No direct client access:</strong> the Granosi app does not read memory chunk documents from Firestore. Memory retrieval for chat and practice runs only through our authenticated backend APIs.</li>
+<li><strong>Vector embeddings:</strong> mathematical embeddings used for similarity search remain stored so the service can find relevant memories. They are not human-readable diary text, but they are derived from your practice content.</li>
+<li><strong>Deduplication hashes:</strong> identifiers used to avoid duplicate memory entries are stored as one-way hashes rather than the original text.</li>
+</ul>
+
+<p>
+Google still encrypts Firestore data at rest as part of its cloud infrastructure.
+Our application-layer encryption adds protection so memory text is not exposed in
+readable form to client apps or casual database inspection.
 </p>
 
 <h3>Subscription and Purchase Data</h3>
@@ -288,8 +308,10 @@ We retain information for as long as needed to provide the service:
 
 <ul>
 <li><strong>Account and profile data:</strong> while your account is active</li>
-<li><strong>AI learning memory:</strong> until you delete your account or until storage limits cause older chunks to be removed</li>
-<li><strong>Subscription and ad transaction records:</strong> for operational, fraud prevention, and legal purposes</li>
+<li><strong>AI learning memory (encrypted on server):</strong> until you delete your account or until storage limits cause older chunks to be removed</li>
+<li><strong>Ad reward sessions:</strong> removed from our servers about <strong>30 days</strong> after they are completed, expire, or are rejected</li>
+<li><strong>Ad reward transaction records</strong> (idempotency logs for rewarded ads): kept about <strong>120 days</strong>, then deleted automatically</li>
+<li><strong>Subscription transaction records:</strong> kept while needed to validate purchases and prevent duplicate crediting (low volume)</li>
 <li><strong>Local diary data:</strong> on your device until you delete it, uninstall the app, or clear app data</li>
 <li><strong>Cloud backups:</strong> in your Drive or iCloud account until you delete them</li>
 </ul>
@@ -303,10 +325,19 @@ contacting us (see Your Choices and Rights below).
 
 <p>
 We implement reasonable technical and organizational measures to protect your
-information, including encrypted cloud backups (AES-256-GCM with PBKDF2 key
-derivation) and authenticated API access. However, no method of transmission or
-storage over the internet is completely secure, and we cannot guarantee absolute
-security.
+information, including:
+</p>
+
+<ul>
+<li><strong>Encrypted cloud backups</strong> (AES-256-GCM with PBKDF2 key derivation) stored in your Google Drive or iCloud account</li>
+<li><strong>Encrypted AI learning memory</strong> on our servers (AES-256-GCM for text fields, with per-user key derivation and backend-only access)</li>
+<li><strong>Firestore security rules</strong> that block direct client read/write access to learning memory collections</li>
+<li><strong>Authenticated API access</strong> for features that process your content</li>
+</ul>
+
+<p>
+However, no method of transmission or storage over the internet is completely
+secure, and we cannot guarantee absolute security.
 </p>
 
 <h2>Your Choices and Rights</h2>
